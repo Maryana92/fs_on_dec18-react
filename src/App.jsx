@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Header = (props) => {
-  console.log('------Rendering Header', props.title);
   return (
     <h1 className="Header">
       {props.title}
@@ -14,31 +13,34 @@ class App extends React.Component {
     super(...args);
 
     this.state = {
-      title: 'My app'
+      title: 'My app',
+      isHandlingChanges: true,
     };
+
+    document.addEventListener('contextmenu', () => {
+      this.setState({
+        isHandlingChanges: !this.state.isHandlingChanges,
+      });
+    });
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
     this.setState({
       title: event.target.value
     });
-
-    console.log('------Setting title');
   };
 
 
   render() {
-    console.log('------Rendering App', this.state.title);
-
     return (
       <div className="App">
         <Header title={this.state.title} />
 
         <input
           type="text"
-          onChange={(event) => {
-            this.handleChange(event)
-          }}
+          onChange={this.state.isHandlingChanges && this.handleChange}
         />
       </div>
     );
