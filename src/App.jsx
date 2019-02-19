@@ -18,8 +18,10 @@ class App extends React.Component {
     };
 
     document.addEventListener('contextmenu', () => {
-      this.setState({
-        isHandlingChanges: !this.state.isHandlingChanges,
+      this.setState((state) => {
+        return {
+          isHandlingChanges: !state.isHandlingChanges,
+        };
       });
     });
 
