@@ -34,13 +34,18 @@ class App extends React.Component {
 
 
   render() {
+    const handleChange =  this.state.isHandlingChanges
+      ? this.handleChange
+      : null
+    ;
+
     return (
       <div className="App">
         <Header title={this.state.title} />
 
         <input
           type="text"
-          onChange={this.state.isHandlingChanges && this.handleChange}
+          onChange={handleChange}
         />
       </div>
     );
